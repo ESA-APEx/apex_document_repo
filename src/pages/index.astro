@@ -1,11 +1,163 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import FileIcon from '@/components/react/FileIcon';
 import Layout from '../layouts/Layout.astro';
+import getAllDocs from '../lib/docs.js';
+import {Input} from "@/components/react/Input";
+import { FaSearch, FaGithub, FaFileDownload, FaFileAlt, FaCheckCircle } from "react-icons/fa";
+import { FaCodeFork } from "react-icons/fa6";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const docs = getAllDocs;
+
+
+// Build a set of category/tags for simple filtering
+const tags = Array.from(new Set(docs.flatMap(d => {
+	const t = d.meta?.tags || d.meta?.tag || [];
+	if(Array.isArray(t)) return t;
+	if(typeof t === 'string') return [t];
+	if(d.meta?.type) return [d.meta.type];
+	return [];
+})));
+
 ---
 
 <Layout>
-	<Welcome />
+	<main class="min-h-screen">
+		<header class="hero-bg text-white py-20">
+			<div class="max-w-4xl mx-auto px-6 text-center">
+				<h1 class="font-bold">APEx Documentation Repository</h1>
+				<p class="mt-4 text-lg text-slate-100/90">Discover and explore project deliverables from ESA projects</p>
+
+				<div class="mt-8">
+					<label class="relative block max-w-2xl mx-auto">
+						<FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+						<Input id="search" className="bg-white text-black pl-10" placeholder="Search documents by title, project, or author..." />
+					</label>
+					<div class="mt-5 flex justify-center">
+						<a href="#" class="inline-flex items-center px-4 py-2 rounded bg-white/20 hover:bg-white/25 button">
+						<FaGithub className="inline-flex items-center mr-2" />
+							Contribute via GitHub
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<section class="max-w-6xl mx-auto px-6 py-12">
+			<div class="flex items-center justify-between">
+				<h2 class="text-2xl font-semibold">Browse Documents</h2>
+				<div class="hidden sm:flex gap-3">
+					<button data-filter="all" class="px-3 py-1 rounded bg-slate-800 text-white text-sm">All Documents</button>
+					{tags.map(tag => (
+						<button data-filter={tag} class="px-3 py-1 rounded border text-sm">{tag}</button>
+					))}
+				</div>
+			</div>
+
+			<div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cards">
+				{docs.map(doc => {
+					const type = (doc.meta?.type || 'Deliverable').toString();
+					const title = doc.meta?.title || doc.slug;
+					const desc = doc.meta?.description || '';
+					return (
+						<article class="card" data-tags={type}>
+							<div class="flex justify-between items-start">
+								<span class="tag">{type}</span>
+								<a href={doc.url} target="_blank" class="text-slate-400 text-sm"><FaFileDownload/></a>
+							</div>
+
+							<h4 class="mt-4 font-semibold"><a href={doc.url} class="hover:underline flex items-center gap-2" target="_blank">
+								<FileIcon filename={doc.filename}/>
+								{title}
+								</a></h4>
+							<p class="text-xs text-slate-500 mt-1">{doc.meta.project}</p>
+							<p class="text-sm text-slate-600 mt-3 line-clamp-3">{desc}</p>
+						</article>
+					);
+				})}
+			</div>
+		</section>
+		<section class="mt-10 info">
+		<div class="mx-auto px-12 py-12 text-center justify-center text-slate-600 info">
+			<h3>Contribute to the APEx Documentation Repository</h3>
+			<p>Have a document to contribute? <a href="#" class="text-blue-600 hover:underline">Submit it via our GitHub repository</a> and help expand the APEx Documentation Repository!</p>
+			<div class="flex gap-5 mt-5 justify-center">
+				
+				<article class="card relative overflow-hidden w-1/6">
+					<div class="relative z-10 p-6">
+						<div class="flex items-center gap-5 h-16">
+						<FaCodeFork size={52} />
+						<h2 class="text-left font-bold !m-0">Fork and Clone</h2>
+						</div>
+
+						<p class="text-sm text-left text-slate-600 mt-5">
+						Fork the repository and clone it to your local machine
+						</p>
+					</div>
+
+					<span class="absolute top-5 right-5 text-[9rem] font-bold text-neutral-200 z-0 pointer-events-none select-none leading-none">
+						1
+					</span>
+				</article>
+				<article class="card relative overflow-hidden  w-1/6">
+					<div class="relative z-10 p-6">
+						<div class="flex items-center gap-5 h-16">
+						<FaFileAlt size={52} />
+						<h2 class="text-left font-bold">Add Your Document</h2>
+						</div>
+
+						<p class="text-sm text-left text-slate-600 mt-5">
+						Add your document with proper metadata in the correct category folder
+						</p>
+					</div>
+
+					<span class="absolute top-5 right-5 text-[9rem] font-bold text-neutral-200 z-0 pointer-events-none select-none leading-none">
+						2
+					</span>
+				</article>
+				<article class="card relative overflow-hidden  w-1/6">
+					<div class="relative z-10 p-6">
+						<div class="flex  items-center gap-5 h-16">
+						<FaCheckCircle size={52} />
+						<h2 class="text-left font-bold">Submit PR</h2>
+						</div>
+
+						<p class="text-sm text-left text-slate-600 mt-5">
+						Create a pull request with a clear description of your contribution
+						</p>
+					</div>
+
+					<span class="absolute top-5 right-5 text-[9rem] font-bold text-neutral-200 z-0 pointer-events-none select-none leading-none">
+						3
+					</span>
+				</article>
+			</div>
+		</section>
+
+	</main>
+
+	<script type="module">
+		const search = document.getElementById('search');
+		const cards = Array.from(document.querySelectorAll('#cards article'));
+		search.addEventListener('input', (e)=>{
+			const q = e.target.value.trim().toLowerCase();
+			cards.forEach(c=>{
+				const text = c.innerText.toLowerCase();
+				c.style.display = q === '' || text.includes(q) ? '' : 'none';
+			});
+		});
+
+		document.querySelectorAll('[data-filter]').forEach(btn=>{
+			btn.addEventListener('click', ()=>{
+				const f = btn.getAttribute('data-filter');
+				cards.forEach(c=>{
+					if(f === 'all') c.style.display = '';
+					else {
+						const tags = (c.getAttribute('data-tags')||'').toLowerCase().split(',').map(s=>s.trim());
+						c.style.display = tags.includes(f.toLowerCase()) ? '' : 'none';
+					}
+				})
+			})
+		})
+	</script>
+
 </Layout>

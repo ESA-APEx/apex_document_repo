@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: "NotesEsa";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("../assets/fonts/NotesEsa.woff2") format("woff2"),
+    url("../assets/fonts/NotesEsa.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NotesEsa";
+  font-style: italic;
+  font-weight: 400;
+  src:
+    url("../assets/fonts/NotesEsa-Italic.woff2") format("woff2"),
+    url("../assets/fonts/NotesEsa-Italic.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NotesEsa";
+  font-style: bold;
+  font-weight: 700;
+  src:
+    url("../assets/fonts/NotesEsa-Bold.woff2") format("woff2"),
+    url("../assets/fonts/NotesEsa-Bold.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "NotesEsa";
+  font-style: italic;
+  font-weight: 700;
+  src:
+    url("../assets/fonts/NotesEsa-BoldItalic.woff2") format("woff2"),
+    url("../assets/fonts/NotesEsa-BoldItalic.woff") format("woff");
+  font-display: swap;
+}
+
+
+/* Custom utilities and base styles to match design */
+:root{
+  --bg-hero: rgb(4, 51, 70);
+  --bg-info: #f9f9f9;
+  --button-color: rgb(0, 174, 157);
+}
+
+body{
+  @apply bg-white text-slate-800 antialiased;
+}
+
+.hero-bg{
+  background: var(--bg-hero);
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: "NotesEsa", sans-serif;
+}
+
+h1 {
+    @apply text-5xl font-bold my-5;
+}
+
+h2 {
+    @apply text-3xl font-bold my-5;
+}
+h3 {
+    @apply text-2xl font-semibold my-5;
+}
+h4 {
+    @apply text-xl font-semibold my-5;
+}
+
+h5 {
+    @apply text-lg font-semibold my-5;
+}
+h6 {
+    @apply text-base font-semibold my-5;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-slate-100 p-6;
+}
+
+.tag {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs bg-slate-100 text-slate-700;
+}
+
+.button {
+    @apply hover:bg-white/25 p-4 px-5 rounded-full;
+    background-color: var(--button-color);
+}
+.info {
+    background: var(--bg-info);
+}
