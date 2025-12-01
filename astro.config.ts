@@ -10,8 +10,8 @@ const config = {
     BASE_PATH: "",
   },
   production: {
-    SITE_URL: "https://esa-apex.github.io/apex_document_repo/",
-    BASE_PATH: "",
+    SITE_URL: "https://esa-apex.github.io/",
+    BASE_PATH: "/apex_document_repo/",
   },
 };
 
