@@ -150,7 +150,6 @@ def build_projects(
             logging.debug("Copying project: %s", project_id)
             filtered_refs.append(project["href"])
             dest = target / "projects" / project["href"]
-            print("DEST: " + str(dest))
             write_project_collection(dest, data)
             themes = add_project_themes_to_dict(
                 themes, {"id": project_id, "title": data["title"]}, data
