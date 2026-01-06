@@ -14,7 +14,16 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+formatter = logging.Formatter(
+    "%(asctime)s %(levelname)-8s [%(name)s] %(message)s",
+    "%Y-%m-%d %H:%M:%S",
+)
+_stream_handler = logging.StreamHandler()
+_stream_handler.setFormatter(formatter)
+if not logger.handlers:
+    logger.addHandler(_stream_handler)
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
 
 LICENSE_TO_KEEP = "proprietary"
 
@@ -28,20 +37,20 @@ def recreate_dir(path: Path) -> None:
     The function is idempotent and guarantees the path exists and is empty
     on return.
     """
-    logging.debug("Recreating dir: %s", str(path))
+    logger.debug("Recreating dir: %s", path)
     if path.exists():
         shutil.rmtree(path)
     path.mkdir(parents=True, exist_ok=True)
 
 
 def load_json(path: Path) -> Dict:
-    logging.debug("Reading file %s", str(path))
+    logger.debug("Reading file %s", path)
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
 
 
 def write_json(path: Path, data: Dict) -> None:
-    logging.debug("Writing file %s", str(path))
+    logger.debug("Writing file %s", path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2)
@@ -148,7 +157,7 @@ def build_projects(
 
         # @TODO - Update condition for filtering on APEx projects!
         if data.get("license", "").lower() != license_to_keep:
-            logging.debug("Copying project: %s", project_id)
+            logger.debug("Copying project: %s", project_id)
             filtered_refs.append(project["href"])
             dest = target / "projects" / project["href"]
             write_project_collection(dest, data)
@@ -156,7 +165,7 @@ def build_projects(
                 themes, {"id": project_id, "title": data["title"]}, data
             )
         else:
-            logging.debug("Skipping project: %s", project_id)
+            logger.debug("Skipping project: %s", project_id)
 
     # Build filtered catalogue
     filtered_catalogue = dict(catalog)
@@ -184,7 +193,7 @@ def build_themes(
     catalog = load_json(catalog_path)
 
     for theme_id, projects in themes.items():
-        logging.debug("Copying theme: %s", theme_id)
+        logger.debug("Copying theme: %s", theme_id)
         source = themes_source / theme_id
         dest = themes_target / theme_id
         shutil.copytree(source, dest)
@@ -207,7 +216,7 @@ def build_themes(
 
 def build_main_catalogue(catalogue_source: Path, target: Path) -> None:
     catalogue_target = target / "catalog.json"
-    logging.debug("Building the main catalog.json file")
+    logger.debug("Building the main catalog.json file")
     catalogue = load_json(catalogue_source)
     catalogue["title"] = "APEx Documentation Repository"
     catalogue["links"] = get_catalogue_links(catalogue)
@@ -232,7 +241,7 @@ def main(
     build_themes(themes, source_base / "themes", target_base)
     build_main_catalogue(source_base / "catalog.json", target_base)
 
-    logging.info(
+    logger.info(
         "Copied %i projects and %i themes", len(filtered_refs), len(themes.keys())
     )
 
