@@ -54,6 +54,7 @@ def test_write_project_collection_filters_links(tmp_path: Path):
             {"href": "/x", "title": "Experiment: something"},
             {"href": "/y"},
             {"href": "/z", "title": "Workflow: something else"},
+            {"href": "/products/", "title": "Product reference"},
         ],
     }
     fa.write_project_collection(dest, project)
