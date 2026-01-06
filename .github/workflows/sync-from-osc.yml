@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add projects
+          git add catalog
           git commit -m "Sync proprietary projects from source" || echo "No changes"
 
       - name: Push changes
