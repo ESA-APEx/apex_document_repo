@@ -172,6 +172,10 @@ def build_themes(
     projects_target: Path,
 ) -> None:
     recreate_dir(themes_target)
+
+    catalog_path = themes_source / "catalog.json"
+    catalog = load_json(catalog_path)
+
     for theme_id, projects in themes.items():
         logging.debug("Copying theme: %s", theme_id)
         source = themes_source / theme_id
@@ -181,6 +185,17 @@ def build_themes(
         theme = load_json(dest / "catalog.json")
         theme["links"] = get_theme_links(theme, projects, projects_target)
         write_json(dest / "catalog.json", theme)
+
+    # Build filtered catalogue
+    filtered_catalogue = dict(catalog)
+    filtered_catalogue["links"] = [
+        link
+        for link in catalog.get("links", [])
+        if link.get("rel") not in ["root"]
+        and link.get("href").split("/")[1] in themes.keys()
+    ]
+
+    write_json(themes_target / "catalog.json", filtered_catalogue)
 
 
 def build_main_catalogue(catalogue_source: Path, catalogue_target: Path) -> None:
@@ -197,9 +212,9 @@ def build_main_catalogue(catalogue_source: Path, catalogue_target: Path) -> None
 def main(
     *,
     osc_base: Path = Path("open-science-catalog-metadata"),
-    projects_target: Path = Path("projects"),
-    themes_target: Path = Path("themes"),
-    catalogue_target: Path = Path("catalogue.json"),
+    projects_target: Path = Path("catalog/projects"),
+    themes_target: Path = Path("catalog/themes"),
+    catalogue_target: Path = Path("catalog/catalog.json"),
     license_to_keep: str = LICENSE_TO_KEEP,
 ) -> None:
     filtered_refs, themes, _ = build_projects(

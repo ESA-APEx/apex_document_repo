@@ -34,27 +34,27 @@
     },
     {
       "rel": "child",
-      "href": "projects/world-ocean-circulation/collection.json",
+      "href": "catalog/projects/world-ocean-circulation/collection.json",
       "title": "WOC"
     },
     {
       "rel": "child",
-      "href": "projects/polaris/collection.json",
+      "href": "catalog/projects/polaris/collection.json",
       "title": "POLARIS"
     },
     {
       "rel": "child",
-      "href": "projects/careheat/collection.json",
+      "href": "catalog/projects/careheat/collection.json",
       "title": "deteCtion and threAts of maRinE Heat waves (CAREHeat)"
     },
     {
       "rel": "child",
-      "href": "projects/coastal-carbon-mapper/collection.json",
+      "href": "catalog/projects/coastal-carbon-mapper/collection.json",
       "title": "On the possibility of mapping carbon fractions in coastal waters using Sentinel-2 MSI and Sentinel-3 OLCI imagery (CoastalCarbonMapper)"
     },
     {
       "rel": "child",
-      "href": "projects/waposal/collection.json",
+      "href": "catalog/projects/waposal/collection.json",
       "title": "WAPOSAL"
     }
   ],

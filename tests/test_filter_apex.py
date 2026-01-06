@@ -160,10 +160,27 @@ def test_build_full_catalogue(tmp_path: Path):
     # verify written project file
     assert (projects_target / "projects" / "project-1" / "collection.json").exists()
 
+    # verify written project catalogue file
+    assert (projects_target / "catalog.json").exists()
+
     # setup themes source and build themes
     themes_source = tmp_path / "open-science-catalog-metadata" / "themes"
     atmosphere = themes_source / "atmosphere"
     atmosphere.mkdir(parents=True)
+    
+    catalog = {
+        "links": [
+            {"rel": "root", "href": "/", "title": "root"},
+            {
+                "rel": "child",
+                "href": "themes/atmosphere/collection.json",
+                "title": "Atmosphere",
+            },
+        ]
+    }
+    write_path = themes_source / "catalog.json"
+    write_path.write_text(json.dumps(catalog))
+    
     theme_catalog = {"links": [{"rel": "root", "href": "/"}], "title": "Atmosphere"}
     (atmosphere / "catalog.json").write_text(json.dumps(theme_catalog))
 
@@ -177,6 +194,9 @@ def test_build_full_catalogue(tmp_path: Path):
     data = json.loads(dest_theme_catalog.read_text())
     # Links should include a child to project-1
     assert any(l.get("rel") == "child" for l in data.get("links", []))
+
+    # verify written theme catalogue file
+    assert (themes_target / "catalog.json").exists()
 
     # Build main catalogue
     cat_source = tmp_path / "open-science-catalog-metadata" / "catalog.json"
