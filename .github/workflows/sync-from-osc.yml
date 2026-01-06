@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ESA-EarthCODE/open-science-catalog-metadata
+          path: open-science-catalog-metadata 
 
       - name: Set up Python
         uses: actions/setup-python@v5
