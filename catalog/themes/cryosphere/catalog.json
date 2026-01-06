@@ -34,17 +34,17 @@
     },
     {
       "rel": "child",
-      "href": "catalog/projects/arcticsummit-arctic-summer-ice-thickness/collection.json",
+      "href": "../../projects/arcticsummit-arctic-summer-ice-thickness/collection.json",
       "title": "(LPF) ArcticSummIT"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/sral-processing-landice/collection.json",
+      "href": "../../projects/sral-processing-landice/collection.json",
       "title": "SRAL Processing over Land Ice"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/lakes4antarctica/collection.json",
+      "href": "../../projects/lakes4antarctica/collection.json",
       "title": "Lakes4Antarctica"
     }
   ],

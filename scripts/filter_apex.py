@@ -28,17 +28,20 @@ def recreate_dir(path: Path) -> None:
     The function is idempotent and guarantees the path exists and is empty
     on return.
     """
+    logging.debug("Recreating dir: %s", str(path))
     if path.exists():
         shutil.rmtree(path)
     path.mkdir(parents=True, exist_ok=True)
 
 
 def load_json(path: Path) -> Dict:
+    logging.debug("Reading file %s", str(path))
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
 
 
 def write_json(path: Path, data: Dict) -> None:
+    logging.debug("Writing file %s", str(path))
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2)
@@ -83,7 +86,7 @@ def add_project_themes_to_dict(
 
 
 def get_theme_links(
-    theme: Dict, projects: List[Dict], projects_target: Path
+    theme: Dict, projects: List[Dict]
 ) -> List[Dict]:
     """Build the links for a theme catalogue by appending child project links."""
     links = [
@@ -95,7 +98,9 @@ def get_theme_links(
         links.append(
             {
                 "rel": "child",
-                "href": str(projects_target / project["id"] / "collection.json"),
+                "href": str(
+                    Path("../..") / "projects" / project["id"] / "collection.json"
+                ),
                 "title": project["title"],
             }
         )
@@ -114,15 +119,15 @@ def get_catalogue_links(catalogue: Dict) -> List[Dict]:
 
 def build_projects(
     projects_source: Path,
-    projects_target: Path,
-    license_to_keep: str = LICENSE_TO_KEEP,
+    target: Path,
+    license_to_keep: str = LICENSE_TO_KEEP, # @TODO - Remove this!
 ) -> Tuple[List[str], Dict[str, List[Dict]], Dict]:
     """Build project collections by filtering based on the APEx condition
     and copy them to the target directory.
 
     Returns a tuple of (filtered_refs, themes, filtered_catalogue_dict).
     """
-    recreate_dir(projects_target)
+    recreate_dir(target / "projects")
 
     catalog_path = projects_source / "catalog.json"
     catalog = load_json(catalog_path)
@@ -144,7 +149,8 @@ def build_projects(
         if data.get("license", "").lower() != license_to_keep:
             logging.debug("Copying project: %s", project_id)
             filtered_refs.append(project["href"])
-            dest = projects_target / project["href"]
+            dest = target / "projects" / project["href"]
+            print("DEST: " + str(dest))
             write_project_collection(dest, data)
             themes = add_project_themes_to_dict(
                 themes, {"id": project_id, "title": data["title"]}, data
@@ -160,7 +166,7 @@ def build_projects(
         if link.get("rel") not in ["root"] and link.get("href") in filtered_refs
     ]
 
-    write_json(projects_target / "catalog.json", filtered_catalogue)
+    write_json(target / "projects" / "catalog.json", filtered_catalogue)
 
     return filtered_refs, themes, filtered_catalogue
 
@@ -168,9 +174,10 @@ def build_projects(
 def build_themes(
     themes: Dict[str, List[Dict]],
     themes_source: Path,
-    themes_target: Path,
-    projects_target: Path,
+    target: Path,
 ) -> None:
+
+    themes_target = target / "themes"
     recreate_dir(themes_target)
 
     catalog_path = themes_source / "catalog.json"
@@ -183,7 +190,7 @@ def build_themes(
         shutil.copytree(source, dest)
 
         theme = load_json(dest / "catalog.json")
-        theme["links"] = get_theme_links(theme, projects, projects_target)
+        theme["links"] = get_theme_links(theme, projects)
         write_json(dest / "catalog.json", theme)
 
     # Build filtered catalogue
@@ -198,7 +205,8 @@ def build_themes(
     write_json(themes_target / "catalog.json", filtered_catalogue)
 
 
-def build_main_catalogue(catalogue_source: Path, catalogue_target: Path) -> None:
+def build_main_catalogue(catalogue_source: Path, target: Path) -> None:
+    catalogue_target = target / "catalog.json"
     logging.debug("Building the main catalog.json file")
     catalogue = load_json(catalogue_source)
     catalogue["title"] = "APEx Documentation Repository"
@@ -211,17 +219,18 @@ def build_main_catalogue(catalogue_source: Path, catalogue_target: Path) -> None
 
 def main(
     *,
-    osc_base: Path = Path("open-science-catalog-metadata"),
-    projects_target: Path = Path("catalog/projects"),
-    themes_target: Path = Path("catalog/themes"),
-    catalogue_target: Path = Path("catalog/catalog.json"),
+    source_base: Path = Path("open-science-catalog-metadata"),
+    target_base: Path = Path("catalog"),
     license_to_keep: str = LICENSE_TO_KEEP,
 ) -> None:
+
+    recreate_dir(target_base)
+    
     filtered_refs, themes, _ = build_projects(
-        osc_base / "projects", projects_target, license_to_keep
+        source_base / "projects", target_base, license_to_keep
     )
-    build_themes(themes, osc_base / "themes", themes_target, projects_target)
-    build_main_catalogue(osc_base / "catalog.json", catalogue_target)
+    build_themes(themes, source_base / "themes", target_base)
+    build_main_catalogue(source_base / "catalog.json", target_base)
 
     logging.info(
         "Copied %i projects and %i themes", len(filtered_refs), len(themes.keys())

@@ -34,12 +34,12 @@
     },
     {
       "rel": "child",
-      "href": "catalog/projects/arceme/collection.json",
+      "href": "../../projects/arceme/collection.json",
       "title": "CLIMATE ADAPTATION, EXTREMES, MULTI-HAZARDS AND GEO-HAZARDS SCIENCE - ARCEME"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/smart-ch4/collection.json",
+      "href": "../../projects/smart-ch4/collection.json",
       "title": "SMART-CH4"
     }
   ],

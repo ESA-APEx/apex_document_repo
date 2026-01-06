@@ -34,42 +34,42 @@
     },
     {
       "rel": "child",
-      "href": "catalog/projects/arceme/collection.json",
+      "href": "../../projects/arceme/collection.json",
       "title": "CLIMATE ADAPTATION, EXTREMES, MULTI-HAZARDS AND GEO-HAZARDS SCIENCE - ARCEME"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/grounded-eo/collection.json",
+      "href": "../../projects/grounded-eo/collection.json",
       "title": "Ground Reference Observations Underlying Novel Decametric Vegetation Data Products from Earth Observation - GROUNDED EO"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/fuelity/collection.json",
+      "href": "../../projects/fuelity/collection.json",
       "title": "Fuelity - Fuel Initialization Study"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/sen4carbon-theme-1-terrestrial-gross-primary-production-sen4gpp/collection.json",
+      "href": "../../projects/sen4carbon-theme-1-terrestrial-gross-primary-production-sen4gpp/collection.json",
       "title": "SEN4GPP"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/tccas/collection.json",
+      "href": "../../projects/tccas/collection.json",
       "title": "Terrestrial Carbon Community Assimilation System"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/yipeeo/collection.json",
+      "href": "../../projects/yipeeo/collection.json",
       "title": "YIPEEO: Yield Prediction and Estimation from Earth Observation"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/smart-ch4/collection.json",
+      "href": "../../projects/smart-ch4/collection.json",
       "title": "SMART-CH4"
     },
     {
       "rel": "child",
-      "href": "catalog/projects/fairsendd/collection.json",
+      "href": "../../projects/fairsendd/collection.json",
       "title": "FAIRSenDD: FAIR workflow for Sentinel-1 based Deforestation Detection"
     }
   ],

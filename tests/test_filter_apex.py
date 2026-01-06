@@ -74,7 +74,7 @@ def test_recreate_dir(tmp_path: Path):
     assert not any(d.iterdir())
 
 
-def test_get_theme_links(tmp_path: Path):
+def test_get_theme_links():
     theme = {
         "links": [
             {"rel": "root", "href": "/"},
@@ -82,15 +82,14 @@ def test_get_theme_links(tmp_path: Path):
         ]
     }
     projects = [{"id": "project-1", "title": "Project One"}]
-    projects_target = tmp_path / "projects_target"
-    links = fa.get_theme_links(theme, projects, projects_target)
+    links = fa.get_theme_links(theme, projects)
     # should include the related link and one child link
     rels = [l.get("rel") for l in links]
     assert "related" in rels
     assert "child" in rels
     # child href should be under projects_target
     child = next(l for l in links if l["rel"] == "child")
-    assert child["href"] == str(projects_target / "project-1" / "collection.json")
+    assert child["href"] == str(Path("../..") / "projects" / "project-1" / "collection.json")
 
 
 def test_get_catalogue_links():
@@ -113,17 +112,19 @@ def test_build_full_catalogue(tmp_path: Path):
     projects_source = tmp_path / "open-science-catalog-metadata" / "projects"
     projects_source.mkdir(parents=True)
 
+    target_path = tmp_path / "catalog"
+
     catalog = {
         "links": [
             {"rel": "root", "href": "/", "title": "root"},
             {
                 "rel": "child",
-                "href": "projects/project-1/collection.json",
+                "href": "./project-1/collection.json",
                 "title": "Project 1",
             },
             {
                 "rel": "child",
-                "href": "projects/project-2/collection.json",
+                "href": "./project-2/collection.json",
                 "title": "Project 2",
             },
         ]
@@ -132,7 +133,7 @@ def test_build_full_catalogue(tmp_path: Path):
     write_path.write_text(json.dumps(catalog))
 
     # project 1: public license and references a theme
-    p1_path = projects_source / "projects" / "project-1"
+    p1_path = projects_source / "project-1"
     p1_path.mkdir(parents=True)
     p1 = {
         "title": "P1",
@@ -142,26 +143,25 @@ def test_build_full_catalogue(tmp_path: Path):
     (p1_path / "collection.json").write_text(json.dumps(p1))
 
     # project 2: proprietary license -> should be filtered out
-    p2_path = projects_source / "projects" / "project-2"
+    p2_path = projects_source / "project-2"
     p2_path.mkdir(parents=True)
     p2 = {"title": "P2", "license": "proprietary", "links": []}
     (p2_path / "collection.json").write_text(json.dumps(p2))
     
     # build the projects
-    projects_target = tmp_path / "projects_target"
     filtered_refs, themes, filtered_catalogue = fa.build_projects(
-        projects_source, projects_target, license_to_keep="proprietary"
+        projects_source, target_path, license_to_keep="proprietary"
     )
 
     # project-1 should be included
-    assert "projects/project-1/collection.json" in filtered_refs
+    assert "./project-1/collection.json" in filtered_refs
     assert "project-2" not in " ".join(filtered_refs)
 
     # verify written project file
-    assert (projects_target / "projects" / "project-1" / "collection.json").exists()
+    assert (target_path / "projects" / "project-1" / "collection.json").exists()
 
     # verify written project catalogue file
-    assert (projects_target / "catalog.json").exists()
+    assert (target_path / "projects" / "catalog.json").exists()
 
     # setup themes source and build themes
     themes_source = tmp_path / "open-science-catalog-metadata" / "themes"
@@ -185,18 +185,17 @@ def test_build_full_catalogue(tmp_path: Path):
     (atmosphere / "catalog.json").write_text(json.dumps(theme_catalog))
 
     # build the themes
-    themes_target = tmp_path / "themes_target"
-    fa.build_themes(themes, themes_source, themes_target, projects_target)
+    fa.build_themes(themes, themes_source, target_path)
 
     # Check that theme was copied and updated
-    dest_theme_catalog = themes_target / "atmosphere" / "catalog.json"
+    dest_theme_catalog = target_path / "themes" / "atmosphere" / "catalog.json"
     assert dest_theme_catalog.exists()
     data = json.loads(dest_theme_catalog.read_text())
     # Links should include a child to project-1
     assert any(l.get("rel") == "child" for l in data.get("links", []))
 
     # verify written theme catalogue file
-    assert (themes_target / "catalog.json").exists()
+    assert (target_path / "themes" / "catalog.json").exists()
 
     # Build main catalogue
     cat_source = tmp_path / "open-science-catalog-metadata" / "catalog.json"
@@ -207,9 +206,8 @@ def test_build_full_catalogue(tmp_path: Path):
     cat_source.parent.mkdir(parents=True, exist_ok=True)
     cat_source.write_text(json.dumps(main_catalog))
 
-    catalogue_target = tmp_path / "catalogue.json"
-    fa.build_main_catalogue(cat_source, catalogue_target)
-    result = json.loads(catalogue_target.read_text())
+    fa.build_main_catalogue(cat_source, target_path)
+    result = json.loads((target_path / "catalog.json").read_text())
     assert result["title"] == "APEx Documentation Repository"
     assert all(
         l.get("rel") != "child" or l.get("title", "").lower() in ["themes", "projects"]
