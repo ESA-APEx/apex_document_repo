@@ -33,12 +33,6 @@
       "title": "Theme: Land"
     },
     {
-      "rel": "child",
-      "href": "../../products/fuelity/collection.json",
-      "type": "application/json",
-      "title": "Fuelity Fuel Moisture Content Dataset"
-    },
-    {
       "rel": "self",
       "href": "https://esa-earthcode.github.io/open-science-catalog-metadata/projects/fuelity/collection.json",
       "type": "application/json"

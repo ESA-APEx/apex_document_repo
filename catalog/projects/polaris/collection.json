@@ -16,12 +16,6 @@
       "title": "ESA Polaris project"
     },
     {
-      "rel": "child",
-      "href": "../../products/polaris/collection.json",
-      "type": "application/json",
-      "title": "POLARIS"
-    },
-    {
       "rel": "parent",
       "href": "../catalog.json",
       "type": "application/json",

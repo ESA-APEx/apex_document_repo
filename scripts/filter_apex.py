@@ -59,6 +59,7 @@ def write_project_collection(dest: Path, project: Dict) -> None:
         or (
             "experiment: " not in link["title"].lower()
             and "workflow: " not in link["title"].lower()
+            and "/products/" not in link["href"].lower()
         )
     ]
     project = dict(project)  # shallow copy to avoid mutating caller's data
