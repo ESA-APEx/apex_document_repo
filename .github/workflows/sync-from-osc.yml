@@ -25,7 +25,7 @@ jobs:
           python-version: "3.11"
 
       - name: Generate filtered catalog
-        run: python scripts/filter_projects.py
+        run: python scripts/filter_apex.py
 
       - name: Commit changes
         run: |
