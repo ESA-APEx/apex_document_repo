@@ -1,0 +1,64 @@
+{
+  "type": "Catalog",
+  "id": "oceans",
+  "stac_version": "1.0.0",
+  "description": "Ocean is defined as the mass of water occupying all of the Earth's surface not occupied by land, but excluding all lakes and inland seas. Covering some 70% of the Earthss surface, the ocean is a major driver of the world's weather and climate. It also plays a central role in climate change. The ocean is also a major driver of the global economy, carrying more than 90% of world trade and sustaining the 40% of humanity that lives within 100 km of the coast. Today, the growing impacts of climate change are making ocean observations, research and services more critical than ever before (source: https://www.eionet.europa.eu/gemet/en/concept/5789; https://public.wmo.int/en/our-mandate/focus-areas/oceans). ",
+  "links": [
+    {
+      "rel": "preview",
+      "href": "./EO_Oceans.webp",
+      "type": "image/webp",
+      "title": "Image",
+      "proj:epsg": null,
+      "proj:shape": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "rel": "via",
+      "href": "https://www.eionet.europa.eu/gemet/en/concept/5789",
+      "type": "text/html",
+      "title": "Description"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "Themes"
+    },
+    {
+      "rel": "self",
+      "href": "https://esa-earthcode.github.io/open-science-catalog-metadata/themes/oceans/catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "child",
+      "href": "projects/world-ocean-circulation/collection.json",
+      "title": "WOC"
+    },
+    {
+      "rel": "child",
+      "href": "projects/polaris/collection.json",
+      "title": "POLARIS"
+    },
+    {
+      "rel": "child",
+      "href": "projects/careheat/collection.json",
+      "title": "deteCtion and threAts of maRinE Heat waves (CAREHeat)"
+    },
+    {
+      "rel": "child",
+      "href": "projects/coastal-carbon-mapper/collection.json",
+      "title": "On the possibility of mapping carbon fractions in coastal waters using Sentinel-2 MSI and Sentinel-3 OLCI imagery (CoastalCarbonMapper)"
+    },
+    {
+      "rel": "child",
+      "href": "projects/waposal/collection.json",
+      "title": "WAPOSAL"
+    }
+  ],
+  "updated": "2024-08-27T17:27:42.202831Z",
+  "keywords": [],
+  "title": "Oceans"
+}

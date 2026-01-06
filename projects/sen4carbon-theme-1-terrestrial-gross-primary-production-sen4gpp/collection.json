@@ -1,0 +1,137 @@
+{
+  "type": "Collection",
+  "id": "sen4carbon-theme-1-terrestrial-gross-primary-production-sen4gpp",
+  "stac_version": "1.0.0",
+  "description": "The SEN4GPP project aimed to improve our knowledge on the spatio-temporal variations of GPP associated with terrestrial ecosystems through synergistic exploitation of the complementary information provided by the Sentinel missions (Sentinel-2, Sentinel-3 and Sentinel-5P) at multiple spatial and temporal resolutions. It adopted three estimation approaches to generate GPP datasets: a Light Use Efficiency (LUE) model, a Machine Learning (ML) approach (data-driven), and an approach which relied on the scaling of estimates of solar-induced fluorescence (SIF) by terrestrial ecosystems into GPP. The global GPP dataset derived using the LUE approach are provided here.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "Open Science Catalog"
+    },
+    {
+      "rel": "via",
+      "href": "https://sen4gpp.noveltis.fr/",
+      "title": "Website"
+    },
+    {
+      "rel": "via",
+      "href": "https://eo4society.esa.int/projects/sen4gpp/",
+      "title": "EO4Society Link"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "Projects"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/gpp-sen4gpp/collection.json",
+      "type": "application/json",
+      "title": "Global Gross Primary Productivity (GPP) Dataset, University of Southampton"
+    },
+    {
+      "rel": "self",
+      "href": "https://esa-earthcode.github.io/open-science-catalog-metadata/projects/sen4carbon-theme-1-terrestrial-gross-primary-production-sen4gpp/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "related",
+      "href": "../../themes/land/catalog.json",
+      "type": "application/json",
+      "title": "Theme: Land"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json"
+  ],
+  "osc:status": "ongoing",
+  "themes": [
+    {
+      "scheme": "https://github.com/stac-extensions/osc#theme",
+      "concepts": [
+        {
+          "id": "land"
+        }
+      ]
+    }
+  ],
+  "osc:type": "project",
+  "contacts": [
+    {
+      "name": "Stephen Plummer",
+      "emails": [
+        {
+          "value": "stephen.plummer@esa.int"
+        }
+      ],
+      "roles": [
+        "technical_officer"
+      ]
+    },
+    {
+      "name": "NOVELTIS SAS (FR)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "CEA:LSCE (FR)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "Fondazione Centro Euro:Mediterraneo (IT)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "MAX PLANCK INSTITUTE FOR BIOGEOCHEMISTRY (DE)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "UNIVERSITAT POLITECNICA DE VALENCIA (ES)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "UNIVERSITY OF SOUTHAMPTON (GB)",
+      "roles": [
+        "consortium_member"
+      ]
+    }
+  ],
+  "updated": "2024-09-12T20:32:23.026110Z",
+  "title": "SEN4GPP",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2021-04-22T00:00:00Z",
+          "2023-06-14T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "various",
+  "keywords": []
+}

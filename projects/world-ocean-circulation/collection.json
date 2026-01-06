@@ -1,0 +1,221 @@
+{
+  "type": "Collection",
+  "id": "world-ocean-circulation",
+  "stac_version": "1.0.0",
+  "description": "The objectives of this activity are to (i) develop and validate innovative methodologies allowing to optimize the synergetic capacity offered by satellite data, in situ measurements and numerical models for improving the retrieval of upper:layer ocean circulation products over 4 high-priority pilot areas chosen as to represent at best the diversity of the world ocean circulation regimes, i.e. one polar sea area, one western boundary current, one upwelling region, one coastal area, and ii) in line with the objectives of the United Nations Decade of Ocean Science for Sustainable Development, demonstrate the unique capacity of the innovative products to support effective actions aiming at procuring a clean, safe, sustainably harvested and productive ocean by targeting FOUR high priority pilot applications, i.e. Pollution Monitoring, Safe Navigation, Sustainable Fisheries and Renewable Marine Energies.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../../catalog.json",
+      "type": "application/json",
+      "title": "Open Science Catalog"
+    },
+    {
+      "rel": "via",
+      "href": "https://www.worldoceancirculation.org/",
+      "title": "Website"
+    },
+    {
+      "rel": "via",
+      "href": "https://eo4society.esa.int/projects/world-ocean-circulation/",
+      "title": "EO4Society Link"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/daily-2d-ocean-currents-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Daily 2D ocean surface currents North Atlantic"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/daily-3d-ocean-currents-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Daily 3D ocean currents North Atlantic"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/doppler-derived-surface-current-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Doppler derived surface current Agulhas S1"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/gridded-surface-current-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Gridded Surface Current Oceans Agulhas"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/oceanic-current-fronts-world-ocean-circulation-AGLHS-HR/collection.json",
+      "type": "application/json",
+      "title": "Oceanic HR Fronts Agulhas"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/oceanic-current-fronts-world-ocean-circulation-AGLHS-LR/collection.json",
+      "type": "application/json",
+      "title": "Oceanic LR Fronts Agulhas"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/oceanic-current-fronts-world-ocean-circulation-NA/collection.json",
+      "type": "application/json",
+      "title": "Oceanic Fronts North Atlantic"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/oceanic-current-fronts-world-ocean-circulation-WE/collection.json",
+      "type": "application/json",
+      "title": "Oceanic Fronts Western Europe"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/sargassum-transport-tropical-atlantic-case1-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Sargassum transport based on Lagrangian drift data simulation - Case 1"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/sargassum-transport-tropical-atlantic-case2-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Sargassum transport based on Lagrangian drift data simulation - Case 2"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/stokes-drift-global-ocean-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Stokes drift estimation Global Ocean"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/total-surface-current-north-atlantic-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Total surface current North Atlantic"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/total-surface-current-tropical-atlantic-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Total surface current Tropical Atlantic"
+    },
+    {
+      "rel": "child",
+      "href": "../../products/wind-stress-vector-world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "Wind stress vector (& anomalies) Hourly ERA5"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "Projects"
+    },
+    {
+      "rel": "self",
+      "href": "https://esa-earthcode.github.io/open-science-catalog-metadata/projects/world-ocean-circulation/collection.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "related",
+      "href": "../../themes/oceans/catalog.json",
+      "type": "application/json",
+      "title": "Theme: Oceans"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json"
+  ],
+  "osc:status": "completed",
+  "themes": [
+    {
+      "scheme": "https://github.com/stac-extensions/osc#theme",
+      "concepts": [
+        {
+          "id": "oceans"
+        }
+      ]
+    }
+  ],
+  "osc:type": "project",
+  "contacts": [
+    {
+      "name": "Marie-Helene Rio",
+      "emails": [
+        {
+          "value": "marie-helene.rio@esa.int"
+        }
+      ],
+      "roles": [
+        "technical_officer"
+      ]
+    },
+    {
+      "name": "OCEANDATALAB (FR)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "AGENCIA ESTATAL CONSEJO SUPERIOR DE (ES)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "CNR:RESEARCH INSTITUTE FOR GEO:HYDROLOGICAL PROTECTION IRPI (IT)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "IFREMER (FR)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "NANSEN ENVIRONMENTAL AND REMOTE SENSING CENTER (NO)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "Ocean Next (FR)",
+      "roles": [
+        "consortium_member"
+      ]
+    },
+    {
+      "name": "Universiteit Utrecht (NL)",
+      "roles": [
+        "consortium_member"
+      ]
+    }
+  ],
+  "updated": "2024-09-12T20:32:23.010110Z",
+  "title": "WOC",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2020-04-28T00:00:00Z",
+          "2022-05-31T23:59:59Z"
+        ]
+      ]
+    }
+  },
+  "license": "CC-BY-4.0",
+  "keywords": []
+}

@@ -1,0 +1,106 @@
+{
+  "type": "Catalog",
+  "id": "projects",
+  "stac_version": "1.0.0",
+  "description": "Activities funded by ESA",
+  "links": [
+    {
+      "rel": "child",
+      "href": "./arceme/collection.json",
+      "type": "application/json",
+      "title": "CLIMATE ADAPTATION, EXTREMES, MULTI-HAZARDS AND GEO-HAZARDS SCIENCE - ARCEME"
+    },
+    {
+      "rel": "child",
+      "href": "./arcticsummit-arctic-summer-ice-thickness/collection.json",
+      "type": "application/json",
+      "title": "(LPF) ArcticSummIT"
+    },
+    {
+      "rel": "child",
+      "href": "./grounded-eo/collection.json",
+      "type": "application/json",
+      "title": "Ground Reference Observations Underlying Novel Decametric Vegetation Data Products from Earth Observation - GROUNDED EO"
+    },
+    {
+      "rel": "child",
+      "href": "./fuelity/collection.json",
+      "type": "application/json",
+      "title": "Fuelity - Fuel Initialization Study"
+    },
+    {
+      "rel": "child",
+      "href": "./sen4carbon-theme-1-terrestrial-gross-primary-production-sen4gpp/collection.json",
+      "type": "application/json",
+      "title": "SEN4GPP"
+    },
+    {
+      "rel": "child",
+      "href": "./tccas/collection.json",
+      "type": "application/json",
+      "title": "Terrestrial Carbon Community Assimilation System"
+    },
+    {
+      "rel": "child",
+      "href": "./world-ocean-circulation/collection.json",
+      "type": "application/json",
+      "title": "WOC"
+    },
+    {
+      "rel": "child",
+      "href": "./yipeeo/collection.json",
+      "type": "application/json",
+      "title": "YIPEEO: Yield Prediction and Estimation from Earth Observation"
+    },
+    {
+      "rel": "child",
+      "href": "./polaris/collection.json",
+      "type": "application/json",
+      "title": "POLARIS"
+    },
+    {
+      "rel": "child",
+      "href": "./sral-processing-landice/collection.json",
+      "type": "application/json",
+      "title": "SRAL Processing over Land Ice"
+    },
+    {
+      "rel": "child",
+      "href": "./careheat/collection.json",
+      "type": "application/json",
+      "title": "deteCtion and threAts of maRinE Heat waves (CAREHeat)"
+    },
+    {
+      "rel": "child",
+      "href": "./coastal-carbon-mapper/collection.json",
+      "type": "application/json",
+      "title": "On the possibility of mapping carbon fractions in coastal waters using Sentinel-2 MSI and Sentinel-3 OLCI imagery (CoastalCarbonMapper)"
+    },
+    {
+      "rel": "child",
+      "href": "./smart-ch4/collection.json",
+      "type": "application/json",
+      "title": "SMART-CH4"
+    },
+    {
+      "rel": "child",
+      "href": "./waposal/collection.json",
+      "type": "application/json",
+      "title": "WAPOSAL"
+    },
+    {
+      "rel": "child",
+      "href": "./lakes4antarctica/collection.json",
+      "type": "application/json",
+      "title": "Lakes4Antarctica"
+    },
+    {
+      "rel": "child",
+      "href": "./fairsendd/collection.json",
+      "type": "application/json",
+      "title": "FAIRSenDD: FAIR workflow for Sentinel-1 based Deforestation Detection"
+    }
+  ],
+  "updated": "2025-09-22T20:32:23.037110Z",
+  "title": "Projects"
+}
