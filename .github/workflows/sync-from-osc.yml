@@ -1,0 +1,38 @@
+name: Sync from OSC
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+  push:
+    branches: [ main ]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+
+      - name: Checkout source repo (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: ESA-EarthCODE/open-science-catalog-metadata
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate filtered catalog
+        run: python scripts/filter_projects.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add projects
+          git commit -m "Sync proprietary projects from source" || echo "No changes"
+
+      - name: Push changes
+        run: git push

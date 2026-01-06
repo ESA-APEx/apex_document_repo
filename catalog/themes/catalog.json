@@ -1,0 +1,34 @@
+{
+  "type": "Catalog",
+  "id": "themes",
+  "stac_version": "1.0.0",
+  "description": "Earth Science topics linked to the grand science challenges set in the ESA strategy",
+  "links": [
+    {
+      "rel": "child",
+      "href": "./atmosphere/catalog.json",
+      "type": "application/json",
+      "title": "Atmosphere"
+    },
+    {
+      "rel": "child",
+      "href": "./cryosphere/catalog.json",
+      "type": "application/json",
+      "title": "Cryosphere"
+    },
+    {
+      "rel": "child",
+      "href": "./land/catalog.json",
+      "type": "application/json",
+      "title": "Land"
+    },
+    {
+      "rel": "child",
+      "href": "./oceans/catalog.json",
+      "type": "application/json",
+      "title": "Oceans"
+    }
+  ],
+  "updated": "2024-08-27T17:27:42.203831Z",
+  "title": "Themes"
+}
